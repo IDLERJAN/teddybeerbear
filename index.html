@@ -1,115 +1,230 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>手にビールベア | Links</title>
-
   <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f5f5f5;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    :root{
+      --bg: #fbf5f2;
+      --card: #fff7f4;
+      --muted: #7a6b60;
+      --radius: 20px;
     }
 
-    .wrapper {
-      display: flex;
-      gap: 32px;
-      background: white;
-      padding: 32px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      max-width: 900px;
-      width: 100%;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      background: linear-gradient(180deg, #fbf7f6 0%, #fff 100%);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:48px;
+      color:#4b3b34;
     }
 
-    /* 左：アイコン */
-    .left {
-      flex-shrink: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .page{
+      display:flex;
+      align-items:center;
+      gap:48px;
+      width:100%;
+      max-width:1100px;
     }
 
-    .icon {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
+    /* アバター（カードの外に独立） */
+    .avatar-wrap{
+      flex:0 0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    /* 右：メイン */
-    .right {
-      flex: 1;
-      text-align: center;
+    .avatar{
+      width:160px;
+      height:160px;
+      border-radius:50%;
+      overflow:hidden;
+      border:8px solid #fff;
+      box-shadow: 0 12px 30px rgba(39,30,25,0.12);
+      background: #fff;
     }
 
-    .main-image {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-      margin-bottom: 16px;
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
 
-    h1 {
-      margin: 12px 0 20px;
-      font-size: 24px;
+    /* メインカード */
+    .card{
+      flex:1 1 auto;
+      background: #ffffff;
+      border-radius: calc(var(--radius));
+      padding:28px;
+      box-shadow: 0 10px 30px rgba(39,30,25,0.08);
+      display:flex;
+      align-items:center;
     }
 
-    a {
-      display: block;
-      margin: 10px auto;
-      padding: 14px;
-      max-width: 320px;
-      border-radius: 10px;
-      color: white;
-      font-weight: 600;
-      text-decoration: none;
+    .card-inner{
+      display:flex;
+      gap:28px;
+      width:100%;
+      align-items:center;
     }
 
-    .youtube { background: #ff0000; }
-    .twitch  { background: #9146ff; }
-    .x       { background: #000000; }
+    .left-col{
+      width:300px;
+      min-width:200px;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      justify-content:flex-start;
+      align-items:flex-start;
+      padding-left:8px;
+    }
 
-    /* スマホ対応 */
-    @media (max-width: 768px) {
-      .wrapper {
-        flex-direction: column;
-        align-items: center;
-      }
+    .display-name{
+      font-family: "Yu Mincho","Hiragino Kaku Gothic ProN", "serif";
+      font-size:28px;
+      margin:0;
+      color:#6b3f2b;
+      letter-spacing:0.6px;
+    }
+
+    .links{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:8px;
+    }
+
+    .link-btn{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:12px 16px;
+      border-radius:12px;
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      box-shadow: 0 6px 14px rgba(21,18,16,0.06);
+      transition: transform .08s ease, box-shadow .08s ease;
+      width:100%;
+    }
+    .link-btn:hover{ transform: translateY(-3px); box-shadow: 0 10px 20px rgba(21,18,16,0.08); }
+
+    .btn-icon{
+      width:26px;
+      height:26px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 26px;
+    }
+
+    .youtube{ background:#e84334; }
+    .twitch { background:#6f42c1; }
+    .x      { background:#111111; }
+
+    .link-label{
+      flex:1;
+      text-align:left;
+      font-size:16px;
+      color: #fff;
+    }
+
+    /* 右イメージ */
+    .right-col{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:6px;
+    }
+    .main-image{
+      width:100%;
+      max-width:560px;
+      height:auto;
+      border-radius:12px;
+      box-shadow: 0 6px 18px rgba(39,30,25,0.06);
+      display:block;
+    }
+
+    /* モバイル */
+    @media (max-width:900px){
+      .page{flex-direction:column; gap:20px; padding:28px;}
+      .avatar{width:120px;height:120px;border:6px solid #fff}
+      .card{padding:20px}
+      .card-inner{flex-direction:column}
+      .left-col{width:100%; align-items:flex-start}
+      .right-col{width:100%}
+      .main-image{max-width:100%}
     }
   </style>
 </head>
-
 <body>
-  <div class="wrapper">
-
-    <!-- 左：アイコン -->
-    <div class="left">
-      <img src="icon.png" alt="icon" class="icon">
+  <div class="page">
+    <!-- 左：大きな丸いアバター -->
+    <div class="avatar-wrap">
+      <div class="avatar">
+        <!-- ここは現行の icon.png を使います -->
+        <img src="icon.png" alt="TeddyBeerBear avatar">
+      </div>
     </div>
 
-    <!-- 右：メイン -->
-    <div class="right">
-      <img src="main.png" alt="main image" class="main-image">
+    <!-- 右：カード -->
+    <div class="card" role="region" aria-label="profile card">
+      <div class="card-inner">
+        <!-- 左コラム：名前 + リンク -->
+        <div class="left-col">
+          <h1 class="display-name">手にビールベア</h1>
 
-      <h1>手にビールベア</h1>
+          <div class="links">
+            <a class="link-btn youtube" href="https://www.youtube.com/@teddybeerbear" target="_blank" rel="noopener">
+              <span class="btn-icon" aria-hidden="true">
+                <!-- YouTube SVG -->
+                <svg width="20" height="14" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M23 4.5c0 0-0.2-1.6-0.8-2.3-0.8-1.1-1.7-1.1-2.1-1.2C17.6 0.5 12 0.5 12 0.5s-5.6 0-7.9 0.5c-0.5 0.1-1.3 0.1-2.1 1.2C1.2 2.9 1 4.5 1 4.5S1 6.4 1.1 8.2 1.8 12 1.8 12s0.2 1.6 0.8 2.3c0.8 1.1 1.9 1.1 2.4 1.2 1.8 0.3 7.9 0.5 7.9 0.5s5.6-0.1 7.9-0.5c0.5-0.1 1.6-0.1 2.4-1.2 0.6-0.7 0.8-2.3 0.8-2.3s0.7-2.9 0.8-4.7-0.8-3.7-0.8-3.7z" fill="#fff"/>
+                  <path d="M9.8 10.2V5.8L15.2 8z" fill="#fff"/>
+                </svg>
+              </span>
+              <span class="link-label">YouTube</span>
+            </a>
 
-      <a class="youtube" href="https://www.youtube.com/@teddybeerbear" target="_blank">
-        YouTube
-      </a>
-      <a class="twitch" href="https://www.twitch.tv/imteddybeerbear" target="_blank">
-        Twitch
-      </a>
-      <a class="x" href="https://x.com/T_BB_official" target="_blank">
-        X
-      </a>
+            <a class="link-btn twitch" href="https://www.twitch.tv/imteddybeerbear" target="_blank" rel="noopener">
+              <span class="btn-icon" aria-hidden="true">
+                <!-- Twitch SVG -->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M4 4v12h4v4l4-4h4l4-4V4H4z" fill="#fff"/>
+                </svg>
+              </span>
+              <span class="link-label">Twitch</span>
+            </a>
+
+            <a class="link-btn x" href="https://x.com/T_BB_official" target="_blank" rel="noopener">
+              <span class="btn-icon" aria-hidden="true">
+                <!-- X (旧Twitter) シンプルなX -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M5 4l14 16M19 4L5 20" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="link-label">X</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 右コラム：大きなイメージ -->
+        <div class="right-col">
+          <!-- main.png をそのまま使います。横長推奨 -->
+          <img class="main-image" src="main.png" alt="main illustration">
+        </div>
+      </div>
     </div>
-
   </div>
 </body>
 </html>
